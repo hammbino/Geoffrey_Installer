@@ -1,4 +1,4 @@
-# Geoffrey Installer
+# Geoffrey_Installer
 
 This is the public, secrets-free bootstrap for Geoffrey.
 
@@ -16,9 +16,8 @@ private package files. Its job is only to:
 Open Terminal, paste this, and press Enter:
 
 ```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/hammbino/Geoffrey-Installer/main/install.sh)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/hammbino/Geoffrey_Installer/main/install.sh)"
 ```
 
 The friend must be invited to the private `hammbino/Geoffrey-WhiteGlove` repo
 before running this.
-
