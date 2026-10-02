@@ -8,8 +8,10 @@ Its job is only to:
 2. Put it in `~/Geoffrey`.
 3. Run Geoffrey's own bootstrap.
 
-The friend does not need a GitHub account to start. Geoffrey can help them
-create or sign into GitHub later if they want cloud memory sync.
+The friend does not need a GitHub account to download Geoffrey. During
+onboarding, Geoffrey helps them create or sign into GitHub because Geoffrey's
+memory lives in a private repo.
+It asks whether they already have GitHub and opens signup if they do not.
 
 ## Friend Command
 
