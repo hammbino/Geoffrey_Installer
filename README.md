@@ -4,7 +4,7 @@ This is the public, secrets-free bootstrap for Geoffrey.
 
 Its job is only to:
 
-1. Download the public Geoffrey package.
+1. Clone or update the public Geoffrey package.
 2. Put it in `~/Geoffrey`.
 3. Run Geoffrey's own bootstrap.
 
@@ -22,3 +22,15 @@ Open Terminal, paste this, and press Enter:
 ```
 
 Normal friends do not need a GitHub account to start.
+
+## Future Updates
+
+After Geoffrey is installed, updates are:
+
+```bash
+cd ~/Geoffrey
+./bin/geoffrey update
+```
+
+The update keeps private account tokens and the person's memory repo outside the
+Geoffrey app folder.
