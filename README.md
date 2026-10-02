@@ -5,7 +5,7 @@ This is the public, secrets-free bootstrap for Geoffrey.
 Its job is only to:
 
 1. Download the public Geoffrey package.
-2. Put it in `~/Repos/Geoffrey`.
+2. Put it in `~/Geoffrey`.
 3. Run Geoffrey's own bootstrap.
 
 The friend does not need a GitHub account to start. Geoffrey can help them

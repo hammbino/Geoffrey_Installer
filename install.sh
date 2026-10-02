@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ZIP_URL="https://github.com/hammbino/Geoffrey_Public/archive/refs/heads/main.zip"
-TARGET="$HOME/Repos/Geoffrey"
+TARGET="$HOME/Geoffrey"
 
 say() {
   printf '%s\n' "$1"
@@ -40,7 +40,7 @@ ensure_basic_tools() {
 }
 
 download_geoffrey() {
-  mkdir -p "$HOME/Repos"
+  mkdir -p "$(dirname "$TARGET")"
   tmp_dir="$(mktemp -d)"
   zip_file="$tmp_dir/geoffrey.zip"
 
@@ -76,4 +76,3 @@ ensure_macos
 ensure_basic_tools
 download_geoffrey
 run_geoffrey
-
