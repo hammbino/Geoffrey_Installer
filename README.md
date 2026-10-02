@@ -2,14 +2,14 @@
 
 This is the public, secrets-free bootstrap for Geoffrey.
 
-It does not contain Geoffrey's OAuth configuration, account data, memory, or
-private package files. Its job is only to:
+Its job is only to:
 
-1. Check the Mac setup.
-2. Install GitHub CLI through Homebrew if needed.
-3. Sign the user into GitHub.
-4. Clone the private Geoffrey package.
-5. Run Geoffrey's own bootstrap.
+1. Download the public Geoffrey package.
+2. Put it in `~/Repos/Geoffrey`.
+3. Run Geoffrey's own bootstrap.
+
+The friend does not need a GitHub account to start. Geoffrey can help them
+create or sign into GitHub later if they want cloud memory sync.
 
 ## Friend Command
 
@@ -19,5 +19,4 @@ Open Terminal, paste this, and press Enter:
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/hammbino/Geoffrey_Installer/main/install.sh)"
 ```
 
-The friend must be invited to the private `hammbino/Geoffrey-WhiteGlove` repo
-before running this.
+Normal friends do not need a GitHub account to start.

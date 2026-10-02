@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-REPO="hammbino/Geoffrey-WhiteGlove"
-TARGET="$HOME/Repos/Geoffrey-WhiteGlove"
+ZIP_URL="https://github.com/hammbino/Geoffrey_Public/archive/refs/heads/main.zip"
+TARGET="$HOME/Repos/Geoffrey"
 
 say() {
   printf '%s\n' "$1"
@@ -23,82 +23,48 @@ ask_yes() {
 ensure_macos() {
   if [ "$(uname -s)" != "Darwin" ]; then
     say "This Geoffrey installer is for Mac."
-    say "For another system, clone $REPO manually and run ./bin/geoffrey bootstrap."
+    say "Download Geoffrey from https://github.com/hammbino/Geoffrey_Public and run ./bin/geoffrey bootstrap."
     exit 1
   fi
 }
 
-ensure_git() {
-  if command -v git >/dev/null 2>&1; then
-    say "OK  Git installed"
-    return 0
-  fi
-
-  say "Git is required. macOS will install it through Apple's Command Line Tools."
-  say "A system installer window may open. Finish that install, then run this Geoffrey command again."
-  xcode-select --install 2>/dev/null || true
-  exit 1
-}
-
-ensure_homebrew() {
-  if command -v brew >/dev/null 2>&1; then
-    say "OK  Homebrew installed"
-    return 0
-  fi
-
-  say "Homebrew is not installed. Geoffrey can use it to install GitHub CLI and Node.js."
-  if ! ask_yes "Install Homebrew now? yes/no" "yes"; then
-    say "Stopped. Install Homebrew later from https://brew.sh, then run this again."
+ensure_basic_tools() {
+  if ! command -v curl >/dev/null 2>&1; then
+    say "curl is required and was not found."
     exit 1
   fi
-
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  if [ -x /opt/homebrew/bin/brew ]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  elif [ -x /usr/local/bin/brew ]; then
-    eval "$(/usr/local/bin/brew shellenv)"
-  fi
-
-  if ! command -v brew >/dev/null 2>&1; then
-    say "Homebrew installed, but Terminal has not picked it up yet."
-    say "Close Terminal, reopen it, and run this Geoffrey command again."
+  if ! command -v ditto >/dev/null 2>&1; then
+    say "ditto is required and was not found."
     exit 1
   fi
 }
 
-ensure_gh() {
-  if command -v gh >/dev/null 2>&1; then
-    say "OK  GitHub CLI installed"
-  else
-    ensure_homebrew
-    say "Installing GitHub CLI..."
-    brew install gh
-  fi
-
-  if gh auth status >/dev/null 2>&1; then
-    say "OK  GitHub signed in"
-  else
-    say "GitHub sign-in is needed so this installer can clone Geoffrey's private repo."
-    gh auth login --web
-  fi
-}
-
-clone_or_update_geoffrey() {
+download_geoffrey() {
   mkdir -p "$HOME/Repos"
+  tmp_dir="$(mktemp -d)"
+  zip_file="$tmp_dir/geoffrey.zip"
 
-  if [ -d "$TARGET/.git" ]; then
-    say "Updating Geoffrey..."
-    git -C "$TARGET" pull
-  elif [ -e "$TARGET" ]; then
-    say "The folder already exists but is not a Git repo:"
-    say "$TARGET"
-    say "Move or rename it, then run this Geoffrey command again."
+  say "Downloading Geoffrey..."
+  curl -fL "$ZIP_URL" -o "$zip_file"
+
+  say "Unpacking Geoffrey..."
+  ditto -x -k "$zip_file" "$tmp_dir"
+  extracted="$(find "$tmp_dir" -maxdepth 1 -type d -name 'Geoffrey_Public-*' | head -n 1)"
+  if [ -z "$extracted" ]; then
+    say "Download finished, but Geoffrey could not be found inside the zip."
     exit 1
-  else
-    say "Downloading Geoffrey..."
-    gh repo clone "$REPO" "$TARGET"
   fi
+
+  if [ -e "$TARGET" ]; then
+    backup="$TARGET.backup.$(date +%Y%m%d-%H%M%S)"
+    say "A Geoffrey folder already exists. Moving it to:"
+    say "$backup"
+    mv "$TARGET" "$backup"
+  fi
+
+  mv "$extracted" "$TARGET"
+  say "Geoffrey is ready at:"
+  say "$TARGET"
 }
 
 run_geoffrey() {
@@ -107,8 +73,7 @@ run_geoffrey() {
 }
 
 ensure_macos
-ensure_git
-ensure_gh
-clone_or_update_geoffrey
+ensure_basic_tools
+download_geoffrey
 run_geoffrey
 
