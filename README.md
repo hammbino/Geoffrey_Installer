@@ -28,7 +28,7 @@ Normal friends do not need a GitHub account to start.
 Open a new Terminal and type:
 
 ```bash
-Jeffrey
+Geoffrey
 ```
 
 That opens Claude Code in the person's Geoffrey memory repo, starts with the
