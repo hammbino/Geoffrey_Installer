@@ -25,13 +25,19 @@ Normal friends do not need a GitHub account to start.
 
 ## Daily Use After Setup
 
-Open a new Terminal and type:
+Double-click this file on the Desktop:
+
+```text
+Geoffrey.command
+```
+
+Or open a new Terminal and type:
 
 ```bash
 Geoffrey
 ```
 
-That opens Claude Code in the person's Geoffrey memory repo, starts with the
+Both open Claude Code in the person's Geoffrey memory repo, start with the
 daily briefing and email/follow-up skills, and syncs memory changes with GitHub
 before and after the session.
 
