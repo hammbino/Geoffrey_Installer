@@ -35,6 +35,20 @@ That opens Claude Code in the person's Geoffrey memory repo, starts with the
 daily briefing and email/follow-up skills, and syncs memory changes with GitHub
 before and after the session.
 
+To prove Geoffrey works immediately:
+
+```bash
+cd ~/Geoffrey
+./bin/geoffrey first-win
+```
+
+To see what is ready or stuck:
+
+```bash
+cd ~/Geoffrey
+./bin/geoffrey dashboard
+```
+
 ## Future Updates
 
 After Geoffrey is installed, updates are:
