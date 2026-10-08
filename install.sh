@@ -98,6 +98,11 @@ install_or_update_geoffrey() {
 run_geoffrey() {
   cd "$TARGET"
   ./bin/geoffrey bootstrap
+  if [ -d "$HOME/Applications/Geoffrey.app" ]; then
+    say ""
+    say "Opening Geoffrey..."
+    open "$HOME/Applications/Geoffrey.app"
+  fi
 }
 
 ensure_macos
